@@ -1,4 +1,5 @@
 <?php
+namespace InstagramAuth;
 require_once './util.php';
 
 class Authenticator {
