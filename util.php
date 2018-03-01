@@ -11,7 +11,7 @@ function getAuthLink () {
 
 function validateFields ( $item = [], $fields = [] ) {
   foreach ( $fields as $field ) {
-    if ( !isset( $item[ $field ] ) ) return false;
+    if ( !isset( $item[ $field ] ) || strlen( $item[ $field ] ) <= 0 ) return false;
   }
 
   return true;
