@@ -8,16 +8,22 @@ class Authenticator {
   public $user;
   public $codeEndpoint = "https://api.instagram.com/oauth/access_token";
 
-  public function __construct () {
-    if ( !file_exists( "config.json" ) ) {
-      throw new Exception( "Could not find config file (expecting ./config.json)!" );
+  public function __construct ( $config = null ) {
+    if ( !$config ) {
+      throw new \Exception( "Expecting config variable!" );
     }
 
-    $config = json_decode( file_get_contents( "config.json" ), true );
-    $valid = validateFields( $config, [ "client_id", "client_secret" ] );
+    try {
+      $config = is_object( $config ) ? (array)$config : $config;
+      $config = is_array( $config ) ? $config : json_decode( file_get_contents( $config ), true );
+    }
+    catch ( \Exception $e ) {
+      throw $e;
+    }
 
-    if ( !$valid ) {
-      throw new Exception( "Both client_id and client_secret need to be set in the config file!" );
+    $isValid = validateFields( $config, [ "client_id", "client_secret", "redirect_uri" ] );
+    if ( !$isValid ) {
+      throw new \Exception( "Fields client_id,client_secret and redirect_uri must be set in the config!" );
     }
 
     $this->config = $config;
@@ -25,7 +31,7 @@ class Authenticator {
 
   public function validateCode ( $code = null ) {
     if ( !$code ) {
-      throw new Exception( "Missing code variable!" );
+      throw new \Exception( "Missing code variable!" );
     }
 
     $this->code = $code;
@@ -41,7 +47,7 @@ class Authenticator {
     $valid = validateFields( $validationResponse, [ "access_token", "user" ] );
 
     if ( !$valid ) {
-      throw new DetailedException(
+      throw new \DetailedException(
         "Unexpected api response, expected fields were not set!",
         $requestParams,
         $validationResponse
