@@ -7,7 +7,6 @@ class Authenticator {
   public $config;
   public $user;
   public $codeEndpoint = "https://api.instagram.com/oauth/access_token";
-  public static $authEndpoint = "https://api.instagram.com/oauth/authorize";
 
   public function __construct () {
     if ( !file_exists( "config.json" ) ) {
