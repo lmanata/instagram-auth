@@ -1,4 +1,5 @@
 {
-  "clientId": "",
-  "clientSecret": ""
+  "client_id": "yourIdHere",
+  "client_secret": "yourSecretHere",
+  "redirect_uri": "yourUrlHere.com"
 }
