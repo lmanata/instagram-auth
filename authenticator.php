@@ -23,7 +23,7 @@ class Authenticator {
     $this->config = $config;
   }
 
-  public function verifyCode ( $code = null ) {
+  public function validateCode ( $code = null ) {
     if ( !$code ) {
       throw new Exception( "Missing code variable!" );
     }
@@ -35,16 +35,20 @@ class Authenticator {
       "code" => $code,
     ] );
 
-    $verification = simpleJsonPost( $this->codeEndpoint, $requestParams );
-    $verification = json_decode( $verification, true );
+    $validationResponse = simpleJsonPost( $this->codeEndpoint, $requestParams );
+    $validationResponse = json_decode( $validationResponse, true );
 
-    $valid = validateFields( $verification, [ "access_token", "user" ] );
+    $valid = validateFields( $validationResponse, [ "access_token", "user" ] );
 
     if ( !$valid ) {
-      throw new Exception( "Did not get expected api response, access_token/user fields were not set!" );
+      throw new DetailedException(
+        "Did not get expected api response, access_token/user fields were not set!",
+        $requestParams,
+        $validationResponse
+      );
     }
 
-    return $verification;
+    return $validationResponse;
   }
 
 }
