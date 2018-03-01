@@ -42,7 +42,7 @@ class Authenticator {
 
     if ( !$valid ) {
       throw new DetailedException(
-        "Did not get expected api response, access_token/user fields were not set!",
+        "Unexpected api response, expected fields were not set!",
         $requestParams,
         $validationResponse
       );
