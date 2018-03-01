@@ -1,8 +1,17 @@
 <?php
 
-function validateFields( $item = [], $fields = [] ) {
+function getAuthLink () {
+  $config = json_decode( file_get_contents( "config.json" ), true );
+  $id = $config[ "client_id" ];
+  $uri = $config[ "redirect_uri" ];
+  $link = "https://api.instagram.com/oauth/authorize/?client_id=$id&redirect_uri=$uri&response_type=code";
+
+  echo $link;
+}
+
+function validateFields ( $item = [], $fields = [] ) {
   foreach ( $fields as $field ) {
-    if ( !isset( $item[ $field ] ) )  return false;
+    if ( !isset( $item[ $field ] ) ) return false;
   }
 
   return true;
