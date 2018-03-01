@@ -42,7 +42,11 @@ class DetailedException extends Exception {
     parent::__construct( $message );
   }
 
-  public function getVar ( $key ) {
-    return $this->{$key};
+  public function getResult () {
+    return $this->result;
+  }
+
+  public function getRequest () {
+    return $this->request;
   }
 }
