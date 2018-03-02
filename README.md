@@ -13,7 +13,7 @@ You can either initialize the Authenticator class by passing an array/object or 
 
 ####Initializing
 Passing a config variable
-```
+```php
 if ( isset( $_REQUEST[ "code" ] ) ) {
       $config = [
         "client_secret" => "secret",
@@ -26,7 +26,7 @@ if ( isset( $_REQUEST[ "code" ] ) ) {
 ```
 
 Passing a file directory
-```
+```php
 if ( isset( $_REQUEST[ "code" ] ) ) {
     $configFile = "config.json";
     $authenticator = new \InstagramAuth\Authenticator( $configFile );
@@ -38,7 +38,7 @@ Errors like missing config fields will throw a simple Exception.
 
 Api response related errors will throw a custom 'DetailedException' which can be used to grab both request/response data
 
-```
+```php
 catch(\DetailedException $exception) {
     $requestData = $exception->getRequest();
     $responseData = $exception->getResponse();
