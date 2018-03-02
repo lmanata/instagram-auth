@@ -1,6 +1,6 @@
 <?php
 namespace InstagramAuth;
-require_once './util.php';
+require_once __DIR__ . '/util.php';
 
 class Authenticator {
   public $code;
@@ -15,7 +15,7 @@ class Authenticator {
 
     try {
       $config = is_object( $config ) ? (array)$config : $config;
-      $config = is_array( $config ) ? $config : json_decode( file_get_contents( $config ), true );
+      $config = is_array( $config ) ? $config : json_decode( file_get_contents( __DIR__ . "/$config" ), true );
     }
     catch ( \Exception $e ) {
       throw $e;
