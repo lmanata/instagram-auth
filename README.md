@@ -1,17 +1,17 @@
-##A simple PHP class to handle the instagram user authentication (OAUTH2)
+## A simple PHP class to handle the instagram user authentication (OAUTH2)
 
-##Installation
+## Installation
 Simply require the 'authenticator.php' file.
 
 (Not yet available as a composer lib)
 
 
-##Usage
+## Usage
 You can either initialize the Authenticator class by passing an array/object or by passing a json file directory.
 
-###Examples
+### Examples
 
-####Initializing
+#### Initializing
 Passing a config variable
 ```php
 if ( isset( $_REQUEST[ "code" ] ) ) {
@@ -33,7 +33,7 @@ if ( isset( $_REQUEST[ "code" ] ) ) {
     $codeData = $authenticator->validateCode( $data[ "code" ] );
 }
 ```
-####Error Handling
+#### Error Handling
 Errors like missing config fields will throw a simple Exception.
 
 Api response related errors will throw a custom 'DetailedException' which can be used to grab both request/response data
