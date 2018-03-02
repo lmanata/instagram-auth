@@ -2,7 +2,8 @@
 
 function validateFields ( $item = [], $fields = [] ) {
   foreach ( $fields as $field ) {
-    if ( !isset( $item[ $field ] ) || strlen( $item[ $field ] ) <= 0 ) return false;
+    $size = is_array($item[$field]) ? count($item[$field]) : strlen($item[$field]);
+    if ( !isset( $item[ $field ] ) || $size <= 0 ) return false;
   }
 
   return true;
