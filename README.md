@@ -39,7 +39,7 @@ Errors like missing config fields will throw a simple Exception.
 Api response related errors will throw a custom 'DetailedException' which can be used to grab both request/response data
 
 ```php
-catch(\DetailedException $exception) {
+catch(DetailedException $exception) {
     $requestData = $exception->getRequest();
     $responseData = $exception->getResponse();
 }
